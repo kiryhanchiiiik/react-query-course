@@ -1,34 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-
-type Todo = {
-  id: number;
-  text: string;
-  done: boolean;
-};
-
-export const getTasks = () => {
-  return new Promise<Todo[]>((res) => {
-    setTimeout(() => {
-      res([
-        {
-          id: 1,
-          text: "todo1",
-          done: false,
-        },
-        {
-          id: 2,
-          text: "todo2",
-          done: false,
-        },
-      ]);
-    });
-  });
-};
+import { todoListApi } from "./api";
 
 export function TodoList() {
   const { data, error, isPending } = useQuery({
     queryKey: ["tasks", "list"],
-    queryFn: getTasks,
+    queryFn: todoListApi.getTodoList,
   });
 
   if (isPending) {
